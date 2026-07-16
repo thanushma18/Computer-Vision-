@@ -1,0 +1,21 @@
+import cv2
+import numpy as np
+
+image = cv2.imread("image1.jpg")
+
+if image is None:
+    print("Error: image1.jpg not found!")
+    exit()
+
+cv2.imshow("Original Image", image)
+
+rows, cols = image.shape[:2]
+T = np.float32([[1, 0, 100],
+                [0, 1, 50]])
+
+translated = cv2.warpAffine(image, T, (cols, rows))
+
+cv2.imshow("Moved Image", translated)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
